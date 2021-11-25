@@ -8,5 +8,7 @@ public interface CompanyService {
 
     void addCompany(Company company);
 
+    Company updateCompany(Company company);
+
     Company findByID(UUID uuid);
 }

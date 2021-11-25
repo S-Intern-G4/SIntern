@@ -1,8 +1,11 @@
 package com.sintern.api;
 
 import com.sintern.api.request.CompanyRegisterRequest;
+import com.sintern.api.request.CompanyUpdateRequest;
+import com.sintern.api.request.transformer.CompanyUpdateTransformer;
 import com.sintern.api.response.GetCompanyResponse;
 import com.sintern.api.response.transformer.GetCompanyTransformer;
+import com.sintern.domain.entity.Company;
 import com.sintern.service.CompanyService;
 import com.sintern.service.LogoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +50,13 @@ public class CompanyController {
     public GetCompanyResponse getCompany(@PathVariable UUID companyId){
         return GetCompanyTransformer.transform(companyService.findByID(companyId));
     }
+
+    @PostMapping("/update")
+    @ResponseStatus(HttpStatus.OK)
+    public GetCompanyResponse updateCompany(@Valid @RequestBody CompanyUpdateRequest companyUpdateRequest){
+       return GetCompanyTransformer.transform(
+               companyService.updateCompany(CompanyUpdateTransformer.transform(companyUpdateRequest))
+       );
+    }
+
 }

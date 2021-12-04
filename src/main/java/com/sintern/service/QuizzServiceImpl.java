@@ -14,34 +14,29 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class QuizServiceImpl implements QuizService {
+public class QuizzServiceImpl implements QuizzService {
 
     private final QuizRepository quizRepository;
     private final OpenInternPositionRepository openInternPositionRepository;
 
     @Autowired
-    public QuizServiceImpl(QuizRepository quizzRepository, OpenInternPositionRepository openInternPositionRepository) {
+    public QuizzServiceImpl(QuizRepository quizzRepository, OpenInternPositionRepository openInternPositionRepository) {
         this.quizRepository = quizzRepository;
         this.openInternPositionRepository = openInternPositionRepository;
     }
 
     @Override
-    public void addQuiz(UUID openInterPositionID) {
+    public void addQuiz(List<QuizQuestion> quizQuestionList, UUID openInterPositionID) {
         if(quizRepository.findByOpenInternPositionId(openInterPositionID) == null) {
             OpenInternPosition openInternPosition = openInternPositionRepository.getById(openInterPositionID);
-            List<QuizQuestion> quizQuestionList = new ArrayList<>();
             Quiz quiz = new Quiz();
-            quiz.setOpenInternPosition(openInternPosition);
             quiz.setQuizQuestions(quizQuestionList);
+            quiz.setOpenInternPosition(openInternPosition);
+            quizQuestionList.forEach(quizQuestion -> quizQuestion.setQuiz(quiz));
             quizRepository.save(quiz);
         }
         else {
             throw new ExistentQuizException("A quizz with the same ID already exists!");
         }
-    }
-
-    @Override
-    public Quiz findById(UUID quizID) {
-        return quizRepository.getById(quizID);
     }
 }

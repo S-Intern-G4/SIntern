@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -41,6 +42,23 @@ public class CompanyServiceImpl implements CompanyService {
             company.setPassword(encodedPassword);
             companyRepository.save(company);
         }
+    }
+
+    @Override
+    public Company updateCompany(Company company) {
+        Company newCompany = companyRepository.findById(company.getId()).orElseThrow(() -> new EntityNotFoundException("The company doesn't exist"));
+
+        newCompany.setName(company.getName());
+        newCompany.setAddress(company.getAddress());
+
+        List<Domain> companyDomain = domainService.getDomainsByDomainType(company.getDomain().getDomainType());
+        if (companyDomain.size() < 1) {
+            throw new NonExistentDomainException("There are no domains with this domain type!");
+        }
+        newCompany.setDomain((companyDomain.get(0)));
+
+        companyRepository.save(newCompany);
+        return newCompany;
     }
 
     public Company findByID(UUID uuid) {

@@ -8,5 +8,7 @@ public interface StudentService {
 
     void addStudent(Student student);
 
+    Student updateStudent(Student student);
+
     Student findById(UUID uuid);
 }

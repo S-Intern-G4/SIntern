@@ -1,11 +1,14 @@
 package com.sintern.api;
 
 import com.sintern.api.request.RegisterStudentRequest;
+import com.sintern.api.request.UpdateStudentRequest;
 import com.sintern.api.request.transformer.RegisterStudentTransformer;
+import com.sintern.api.request.transformer.UpdateStudentTransformer;
 import com.sintern.api.response.GetStudentResponse;
 import com.sintern.domain.entity.FileEntity;
 import com.sintern.service.FileService;
 import com.sintern.service.StudentService;
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -66,5 +69,13 @@ public class StudentController {
     @ResponseStatus(HttpStatus.OK)
     public GetStudentResponse getStudent(@PathVariable UUID studentID){
         return transform(studentService.findById(studentID));
+    }
+
+    @PostMapping("/update")
+    @ResponseStatus(HttpStatus.OK)
+    public GetStudentResponse updateStudent(@Valid @RequestBody UpdateStudentRequest updateStudentRequest){
+        return transform(
+                studentService.updateStudent(UpdateStudentTransformer.transform(updateStudentRequest))
+        );
     }
 }

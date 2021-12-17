@@ -1,7 +1,10 @@
 package com.sintern.api;
 
 import com.sintern.api.request.AddApplicationRequest;
+import com.sintern.api.request.ApplicationByOpenInternPositionAndStudentRequest;
 import com.sintern.api.response.GetApplicationByInternPositionResponse;
+import com.sintern.api.response.GetApplicationByOpenInternPositionAndStudentResponse;
+import com.sintern.api.response.transformer.GetApplicationByOpenInternPositionAndStudentTransformer;
 import com.sintern.domain.entity.Application;
 import com.sintern.domain.entity.FileEntity;
 import com.sintern.domain.entity.OpenInternPosition;
@@ -62,5 +65,15 @@ public class ApplicationController {
         }
 
         return applicationByInternPositionResponseList;
+    }
+
+    @PostMapping("/applied")
+    @ResponseStatus(HttpStatus.OK)
+    public GetApplicationByOpenInternPositionAndStudentResponse findApplicationByOpenInternPositionIdAndStudentId(@RequestBody ApplicationByOpenInternPositionAndStudentRequest applicationByOpenInternPositionAnsStudentRequest) {
+        Application application = applicationService.findApplicationsByOpenInternPositionIdAndStudentId(
+                applicationByOpenInternPositionAnsStudentRequest.getOpenInternPositionID(),
+                applicationByOpenInternPositionAnsStudentRequest.getStudentID());
+
+        return GetApplicationByOpenInternPositionAndStudentTransformer.transform(application);
     }
 }

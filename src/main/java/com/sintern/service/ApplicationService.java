@@ -11,4 +11,6 @@ public interface ApplicationService {
     void addApplication(UUID studentID, UUID openInternPositionID, String description);
 
     List<Application> findApplicationsByOpenInternPosition(OpenInternPosition openInternPositionID);
+
+    Application findApplicationsByOpenInternPositionIdAndStudentId(UUID openInternPositionID, UUID studentID);
 }

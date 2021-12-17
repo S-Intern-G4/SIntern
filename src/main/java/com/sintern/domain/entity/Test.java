@@ -5,18 +5,16 @@ import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Application {
-
+public class Test {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
@@ -24,16 +22,13 @@ public class Application {
     UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
-    Student student;
+    @JoinColumn(name = "application_id", referencedColumnName = "id")
+    Application application;
 
     @ManyToOne
-    @JoinColumn(name = "open_position_id")
-    OpenInternPosition openInternPosition;
+    @JoinColumn(name = "quiz_id", referencedColumnName = "id")
+    Quiz quiz;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "application", cascade = CascadeType.ALL)
-    List<Test> tests;
-
-    String description;
-    LocalDateTime dateOfSubmission;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "test", cascade = CascadeType.ALL)
+    List<TestResponse> testResponses;
 }

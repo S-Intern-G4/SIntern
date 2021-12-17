@@ -29,4 +29,7 @@ public class Quiz {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "quiz", cascade = CascadeType.ALL)
     List<QuizQuestion> quizQuestions;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "quiz", cascade = CascadeType.ALL)
+    List<Test> tests;
+
 }

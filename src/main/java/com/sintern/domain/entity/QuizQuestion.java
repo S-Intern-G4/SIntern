@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -40,6 +41,9 @@ public class QuizQuestion {
     @ManyToOne
     @JoinColumn
     Quiz quiz;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "quizQuestion", cascade = CascadeType.ALL)
+    List<TestResponse> testResponses;
 
     public boolean isCorrect(String answer) {
         if (answer.equals(answer1) && correctAnswerIndex == 1) {

@@ -57,13 +57,19 @@ public class SInternExceptionHandler {
 
     @ExceptionHandler(CVNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public ApiError handleCVNotFoundException(CVNotFoundException exception){
+    public ApiError handleCVNotFoundException(CVNotFoundException exception) {
         return new ApiError(ZonedDateTime.now(), HttpStatus.NOT_FOUND, exception.getMessage());
     }
 
     @ExceptionHandler(ExistentQuizException.class)
     @ResponseStatus(value = HttpStatus.FOUND)
     public ApiError handleExistentQuizException(ExistentQuizException exception) {
+        return new ApiError(ZonedDateTime.now(), HttpStatus.FOUND, exception.getMessage());
+    }
+
+    @ExceptionHandler(NoTestsForOpenPositionException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public ApiError handleNoTestsForOpenPositionException(NoTestsForOpenPositionException exception) {
         return new ApiError(ZonedDateTime.now(), HttpStatus.FOUND, exception.getMessage());
     }
 }

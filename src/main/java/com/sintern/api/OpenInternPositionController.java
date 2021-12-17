@@ -1,6 +1,7 @@
 package com.sintern.api;
 
 import com.sintern.domain.dto.OpenInternPositionDTO;
+import com.sintern.domain.dto.TestResultDTO;
 import com.sintern.domain.entity.Company;
 import com.sintern.domain.entity.CompanyLogo;
 import com.sintern.domain.entity.Domain;
@@ -8,6 +9,7 @@ import com.sintern.domain.enums.DomainType;
 import com.sintern.service.CompanyService;
 import com.sintern.service.LogoService;
 import com.sintern.service.OpenInternPositionService;
+import com.sintern.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -27,12 +29,14 @@ public class OpenInternPositionController {
     private final OpenInternPositionService openInternPositionService;
     private final LogoService logoService;
     private final CompanyService companyService;
+    private final TestService testService;
 
     @Autowired
-    public OpenInternPositionController(OpenInternPositionService openInternPositionService, LogoService logoService, CompanyService companyService) {
+    public OpenInternPositionController(OpenInternPositionService openInternPositionService, LogoService logoService, CompanyService companyService, TestService testService) {
         this.openInternPositionService = openInternPositionService;
         this.logoService = logoService;
         this.companyService = companyService;
+        this.testService = testService;
     }
 
     @RequestMapping(value = "/address/{address}", method = RequestMethod.GET)
@@ -82,5 +86,10 @@ public class OpenInternPositionController {
         Company company = companyService.findByID(companyID);
         return openInternPositionService.findOpenInternPositionDTOByCompany(company);
 
+    }
+
+    @GetMapping("/{openPositionId}/test-results")
+    public List<TestResultDTO> getTestResultsForOpenPosition(@PathVariable UUID openPositionId) {
+        return testService.getTestResultsForOpenPosition(openPositionId);
     }
 }

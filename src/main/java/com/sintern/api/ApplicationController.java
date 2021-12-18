@@ -69,10 +69,10 @@ public class ApplicationController {
 
     @PostMapping("/applied")
     @ResponseStatus(HttpStatus.OK)
-    public GetApplicationByOpenInternPositionAndStudentResponse findApplicationByOpenInternPositionIdAndStudentId(@RequestBody ApplicationByOpenInternPositionAndStudentRequest applicationByOpenInternPositionAnsStudentRequest) {
+    public GetApplicationByOpenInternPositionAndStudentResponse findApplicationByOpenInternPositionIdAndStudentId(@RequestBody ApplicationByOpenInternPositionAndStudentRequest applicationByOpenInternPositionAndStudentRequest) {
         Application application = applicationService.findApplicationsByOpenInternPositionIdAndStudentId(
-                applicationByOpenInternPositionAnsStudentRequest.getOpenInternPositionID(),
-                applicationByOpenInternPositionAnsStudentRequest.getStudentID());
+                applicationByOpenInternPositionAndStudentRequest.getOpenInternPositionID(),
+                applicationByOpenInternPositionAndStudentRequest.getStudentID());
 
         return GetApplicationByOpenInternPositionAndStudentTransformer.transform(application);
     }

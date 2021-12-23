@@ -24,6 +24,17 @@ public class OpenInternPositionServiceImpl implements OpenInternPositionService 
         this.openInternPositionRepository = openInternPositionRepository;
     }
 
+    @Override
+    public void addOpenInternPosition(int availablePositions, String department, String description, String name, Company company) {
+        OpenInternPosition openInternPosition = new OpenInternPosition();
+        openInternPosition.setAvailablePositions(availablePositions);
+        openInternPosition.setDepartment(department);
+        openInternPosition.setDescription(description);
+        openInternPosition.setName(name);
+        openInternPosition.setCompany(company);
+        openInternPositionRepository.save(openInternPosition);
+    }
+
     public OpenInternPosition getOpenInternPositionById(UUID id) {
         return openInternPositionRepository.findOpenInternPositionById(id);
     }

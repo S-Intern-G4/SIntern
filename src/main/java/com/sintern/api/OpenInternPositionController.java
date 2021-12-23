@@ -1,5 +1,6 @@
 package com.sintern.api;
 
+import com.sintern.api.request.CreateOpenInternPositionRequest;
 import com.sintern.domain.dto.OpenInternPositionDTO;
 import com.sintern.domain.dto.TestResultDTO;
 import com.sintern.domain.entity.Company;
@@ -12,6 +13,7 @@ import com.sintern.service.OpenInternPositionService;
 import com.sintern.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -91,5 +93,12 @@ public class OpenInternPositionController {
     @GetMapping("/{openPositionId}/test-results")
     public List<TestResultDTO> getTestResultsForOpenPosition(@PathVariable UUID openPositionId) {
         return testService.getTestResultsForOpenPosition(openPositionId);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void createOpenInternPosition(@RequestBody CreateOpenInternPositionRequest createOpenInternPositionRequest) {
+        openInternPositionService.addOpenInternPosition(createOpenInternPositionRequest.getAvailablePositions(),
+                createOpenInternPositionRequest.getDepartment(), createOpenInternPositionRequest.getDescription(), createOpenInternPositionRequest.getName(), companyService.findByID(createOpenInternPositionRequest.getCompanyID()));
     }
 }

@@ -33,25 +33,24 @@ public class TestServiceImpl implements TestService {
         List<TestResultDTO> testResults = new ArrayList<>();
         if (takenTests.size() == 0) {
             throw new NoTestsForOpenPositionException("There aren't any test taken for this position yet.");
-        } else {
-            takenTests.forEach(takenTest -> {
-                List<TestResponse> responses = takenTest.getTestResponses();
-                long points = responses.stream().filter(response -> response.getQuizQuestion().isCorrect(response.getSelectedAnswer())).count();
-                double grade = (points * 10.0) / takenTest.getQuiz().getQuizQuestions().size();
-                Student student = takenTest.getApplication().getStudent();
-                testResults.add(
-                        TestResultDTO.builder()
-                                .fullName(student.getFirstName() + " " + student.getLastName())
-                                .email(student.getEmail())
-                                .phoneNumber(student.getPhoneNumber())
-                                .grade(grade)
-                                .hasPassed(grade >= 5.0)
-                                .build()
-                );
-
-            });
         }
+        takenTests.forEach(takenTest -> {
+            List<TestResponse> responses = takenTest.getTestResponses();
+            long points = responses.stream().filter(response -> response.getQuizQuestion().isCorrect(response.getSelectedAnswerIndex())).count();
+            double grade = (points * 10.0) / takenTest.getQuiz().getQuizQuestions().size();
+            Student student = takenTest.getApplication().getStudent();
+            testResults.add(
+                    TestResultDTO.builder()
+                            .fullName(student.getFirstName() + " " + student.getLastName())
+                            .email(student.getEmail())
+                            .phoneNumber(student.getPhoneNumber())
+                            .grade(grade)
+                            .hasPassed(grade >= 5.0)
+                            .build()
+            );
+        });
         testResults.sort((o1, o2) -> (int) (o2.getGrade() - o1.getGrade()));
+
         return testResults;
     }
 

@@ -28,6 +28,6 @@ public class TestResponse {
     @JoinColumn(name = "quizz_question_id", referencedColumnName = "id")
     QuizQuestion quizQuestion;
 
-    String selectedAnswer;
+    int selectedAnswerIndex;
 
 }

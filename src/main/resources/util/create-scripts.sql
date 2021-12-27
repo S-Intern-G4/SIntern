@@ -41,13 +41,13 @@ INSERT INTO public.test (id, application_id, quiz_id) values ('2f208338-5f6b-11e
 ('0d3b895a-5f6d-11ec-bf63-0242ac130002', '14e89612-5f6c-11ec-bf63-0242ac130002', '8907d7f3-7e05-4e9d-b2ae-80c0205c1478'),
 ('141fae04-5f6d-11ec-bf63-0242ac130002', '53350fe0-5f6c-11ec-bf63-0242ac130002', '8907d7f3-7e05-4e9d-b2ae-80c0205c1478');
 
-INSERT INTO public.test_response (id, selected_answer, quizz_question_id, test_id) VALUES
-('4525feae-5f6d-11ec-bf63-0242ac130002', 'first answer', 'bd22a934-a9a2-42ea-851d-28d759ef0aae', '2f208338-5f6b-11ec-bf63-0242ac130002'),
-('a6db95e6-5f6d-11ec-bf63-0242ac130002', 'second answer2', 'aeeba7ef-e39f-4fcf-9354-f38aa38bfca3', '2f208338-5f6b-11ec-bf63-0242ac130002'),
-('c785cbcc-5f6d-11ec-bf63-0242ac130002', 'second answer', 'bd22a934-a9a2-42ea-851d-28d759ef0aae', '0d3b895a-5f6d-11ec-bf63-0242ac130002'),
-('e0f1b396-5f6d-11ec-bf63-0242ac130002', 'second answer2', 'aeeba7ef-e39f-4fcf-9354-f38aa38bfca3', '0d3b895a-5f6d-11ec-bf63-0242ac130002'),
-('f69057d4-5f6d-11ec-bf63-0242ac130002', 'second answer', 'bd22a934-a9a2-42ea-851d-28d759ef0aae', '141fae04-5f6d-11ec-bf63-0242ac130002'),
-('0e9578a0-5f6e-11ec-bf63-0242ac130002', 'first answer2', 'aeeba7ef-e39f-4fcf-9354-f38aa38bfca3', '141fae04-5f6d-11ec-bf63-0242ac130002');
+INSERT INTO public.test_response (id, selected_answer_index, quizz_question_id, test_id) VALUES
+('4525feae-5f6d-11ec-bf63-0242ac130002', 1, 'bd22a934-a9a2-42ea-851d-28d759ef0aae', '2f208338-5f6b-11ec-bf63-0242ac130002'),
+('a6db95e6-5f6d-11ec-bf63-0242ac130002', 2, 'aeeba7ef-e39f-4fcf-9354-f38aa38bfca3', '2f208338-5f6b-11ec-bf63-0242ac130002'),
+('c785cbcc-5f6d-11ec-bf63-0242ac130002', 2, 'bd22a934-a9a2-42ea-851d-28d759ef0aae', '0d3b895a-5f6d-11ec-bf63-0242ac130002'),
+('e0f1b396-5f6d-11ec-bf63-0242ac130002', 2, 'aeeba7ef-e39f-4fcf-9354-f38aa38bfca3', '0d3b895a-5f6d-11ec-bf63-0242ac130002'),
+('f69057d4-5f6d-11ec-bf63-0242ac130002', 2, 'bd22a934-a9a2-42ea-851d-28d759ef0aae', '141fae04-5f6d-11ec-bf63-0242ac130002'),
+('0e9578a0-5f6e-11ec-bf63-0242ac130002', 1, 'aeeba7ef-e39f-4fcf-9354-f38aa38bfca3', '141fae04-5f6d-11ec-bf63-0242ac130002');
 
 
 

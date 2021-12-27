@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -41,16 +42,10 @@ public class QuizQuestion {
     @JoinColumn
     Quiz quiz;
 
-    public boolean isCorrect(String answer) {
-        if (answer.equals(answer1) && correctAnswerIndex == 1) {
-            return true;
-        }
-        if (answer.equals(answer2) && correctAnswerIndex == 2) {
-            return true;
-        }
-        if (answer.equals(answer3) && correctAnswerIndex == 3) {
-            return true;
-        }
-        return answer.equals(answer4) && correctAnswerIndex == 4;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "quizQuestion", cascade = CascadeType.ALL)
+    List<TestResponse> testResponses;
+
+    public boolean isCorrect(int index) {
+        return correctAnswerIndex == index;
     }
 }

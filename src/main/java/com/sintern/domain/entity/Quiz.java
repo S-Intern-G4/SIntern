@@ -26,7 +26,10 @@ public class Quiz {
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     OpenInternPosition openInternPosition;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "quiz", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "quiz", cascade = CascadeType.ALL)
     List<QuizQuestion> quizQuestions;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "quiz", cascade = CascadeType.ALL)
+    List<Test> tests;
 
 }

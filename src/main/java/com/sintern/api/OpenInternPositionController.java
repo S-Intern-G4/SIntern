@@ -1,6 +1,7 @@
 package com.sintern.api;
 
 import com.sintern.api.request.CreateOpenInternPositionRequest;
+import com.sintern.api.request.transformer.OpenInternPositionTransformer;
 import com.sintern.domain.dto.OpenInternPositionDTO;
 import com.sintern.domain.dto.TestResultDTO;
 import com.sintern.domain.entity.Company;
@@ -96,9 +97,8 @@ public class OpenInternPositionController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public void createOpenInternPosition(@RequestBody CreateOpenInternPositionRequest createOpenInternPositionRequest) {
-        openInternPositionService.addOpenInternPosition(createOpenInternPositionRequest.getAvailablePositions(),
-                createOpenInternPositionRequest.getDepartment(), createOpenInternPositionRequest.getDescription(), createOpenInternPositionRequest.getName(), companyService.findByID(createOpenInternPositionRequest.getCompanyID()));
+        openInternPositionService.addOpenInternPosition(OpenInternPositionTransformer.transform(createOpenInternPositionRequest), createOpenInternPositionRequest.getCompanyID());
     }
 }

@@ -18,20 +18,17 @@ import java.util.stream.Collectors;
 public class OpenInternPositionServiceImpl implements OpenInternPositionService {
 
     private final OpenInternPositionRepository openInternPositionRepository;
+    private final CompanyService companyService;
 
     @Autowired
-    public OpenInternPositionServiceImpl(OpenInternPositionRepository openInternPositionRepository) {
+    public OpenInternPositionServiceImpl(OpenInternPositionRepository openInternPositionRepository, CompanyService companyService) {
         this.openInternPositionRepository = openInternPositionRepository;
+        this.companyService = companyService;
     }
 
     @Override
-    public void addOpenInternPosition(int availablePositions, String department, String description, String name, Company company) {
-        OpenInternPosition openInternPosition = new OpenInternPosition();
-        openInternPosition.setAvailablePositions(availablePositions);
-        openInternPosition.setDepartment(department);
-        openInternPosition.setDescription(description);
-        openInternPosition.setName(name);
-        openInternPosition.setCompany(company);
+    public void addOpenInternPosition(OpenInternPosition openInternPosition, UUID companyID) {
+        openInternPosition.setCompany(companyService.findByID(companyID));
         openInternPositionRepository.save(openInternPosition);
     }
 

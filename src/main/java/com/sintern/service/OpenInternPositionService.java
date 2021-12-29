@@ -11,6 +11,8 @@ import java.util.UUID;
 
 public interface OpenInternPositionService {
 
+    void addOpenInternPosition(OpenInternPosition openInternPosition, UUID companyID);
+
     OpenInternPosition getOpenInternPositionById(UUID openInetrnPositionId);
 
     List<OpenInternPositionDTO> findOpenInternPositionDTOByCompanyAddress(String address);

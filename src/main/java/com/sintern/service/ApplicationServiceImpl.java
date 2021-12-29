@@ -67,4 +67,9 @@ public class ApplicationServiceImpl implements ApplicationService {
     public List<Application> findApplicationsByOpenInternPosition(OpenInternPosition openInternPositionID) {
         return applicationRepository.findApplicationByOpenInternPosition(openInternPositionID);
     }
+
+    @Override
+    public Application findApplicationsByOpenInternPositionIdAndStudentId(UUID openInternPositionID, UUID studentID) {
+        return applicationRepository.findApplicationByStudentIdAndOpenInternPositionId(studentID, openInternPositionID);
+    }
 }

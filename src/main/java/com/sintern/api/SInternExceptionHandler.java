@@ -72,4 +72,10 @@ public class SInternExceptionHandler {
     public ApiError handleNoTestsForOpenPositionException(NoTestsForOpenPositionException exception) {
         return new ApiError(ZonedDateTime.now(), HttpStatus.FOUND, exception.getMessage());
     }
+
+    @ExceptionHandler(ExistentTestException.class)
+    @ResponseStatus(value = HttpStatus.FOUND)
+    public ApiError handleExistentTestException(ExistentTestException exception) {
+        return new ApiError(ZonedDateTime.now(), HttpStatus.FOUND, exception.getMessage());
+    }
 }

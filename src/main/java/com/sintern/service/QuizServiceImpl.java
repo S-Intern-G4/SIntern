@@ -3,7 +3,9 @@ package com.sintern.service;
 import com.sintern.domain.entity.OpenInternPosition;
 import com.sintern.domain.entity.Quiz;
 import com.sintern.domain.entity.QuizQuestion;
+import com.sintern.exception.EntityNotFoundException;
 import com.sintern.exception.ExistentQuizException;
+import com.sintern.exception.NonExistentQuizException;
 import com.sintern.repository.OpenInternPositionRepository;
 import com.sintern.repository.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +37,12 @@ public class QuizServiceImpl implements QuizService {
         quiz.setOpenInternPosition(openInternPosition);
         quizQuestionList.forEach(quizQuestion -> quizQuestion.setQuiz(quiz));
         quizRepository.save(quiz);
+    }
+
+    @Override
+    public Quiz findQuizByOpenPositionId(UUID openPositionId) {
+        Quiz quiz = quizRepository.findByOpenInternPositionId(openPositionId);
+        if(quiz != null) return quiz;
+        else throw new NonExistentQuizException("The quiz does not exist!");
     }
 }

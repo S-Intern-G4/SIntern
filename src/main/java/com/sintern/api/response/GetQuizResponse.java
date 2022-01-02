@@ -1,6 +1,6 @@
 package com.sintern.api.response;
 
-import com.sintern.domain.dto.QuizQuestionDTO;
+import com.sintern.domain.entity.QuizQuestion;
 
 import java.util.List;
 import java.util.UUID;
@@ -8,13 +8,13 @@ import java.util.UUID;
 public class GetQuizResponse {
     UUID id;
 
-    List<QuizQuestionDTO> questions;
+    List<QuizQuestion> questions;
 
     public void setId(UUID id) {
         this.id = id;
     }
 
-    public void setQuestions(List<QuizQuestionDTO> questions) {
+    public void setQuestions(List<QuizQuestion> questions) {
         this.questions = questions;
     }
 
@@ -22,7 +22,7 @@ public class GetQuizResponse {
         return id;
     }
 
-    public List<QuizQuestionDTO> getQuestions() {
+    public List<QuizQuestion> getQuestions() {
         return questions;
     }
 }

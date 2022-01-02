@@ -8,7 +8,7 @@ public class GetQuizTransformer {
     public static GetQuizResponse transform(Quiz quiz){
         GetQuizResponse getQuizResponse = new GetQuizResponse();
         getQuizResponse.setId(quiz.getId());
-        getQuizResponse.setQuestions(QuizQuestionTransformer.transform(quiz.getQuizQuestions()));
+        getQuizResponse.setQuestions(quiz.getQuizQuestions());
         return getQuizResponse;
     }
 }

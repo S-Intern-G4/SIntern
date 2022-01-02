@@ -6,7 +6,7 @@ import com.sintern.domain.entity.Student;
 
 public class GetApplicationTransformer {
 
-    public static GetApplicationByInternPositionResponse transform(Application application, Student student, byte[] cv) {
+    public static GetApplicationByInternPositionResponse transform(Application application, Student student) {
         GetApplicationByInternPositionResponse getApplicationByInternPositionResponse = new GetApplicationByInternPositionResponse();
         getApplicationByInternPositionResponse.setFirstName(student.getFirstName());
         getApplicationByInternPositionResponse.setLastName(student.getLastName());
@@ -14,7 +14,7 @@ public class GetApplicationTransformer {
         getApplicationByInternPositionResponse.setPhoneNumber(student.getPhoneNumber());
         getApplicationByInternPositionResponse.setEmail(student.getEmail());
         getApplicationByInternPositionResponse.setDateOfBirth(student.getDateOfBirth());
-        getApplicationByInternPositionResponse.setCv(cv);
+        getApplicationByInternPositionResponse.setStudentId(student.getId());
         getApplicationByInternPositionResponse.setDescription(application.getDescription());
         getApplicationByInternPositionResponse.setDateOfSubmission(application.getDateOfSubmission());
         return getApplicationByInternPositionResponse;

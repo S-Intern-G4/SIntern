@@ -6,7 +6,6 @@ import com.sintern.api.response.GetApplicationByInternPositionResponse;
 import com.sintern.api.response.GetApplicationByOpenInternPositionAndStudentResponse;
 import com.sintern.api.response.transformer.GetApplicationByOpenInternPositionAndStudentTransformer;
 import com.sintern.domain.entity.Application;
-import com.sintern.domain.entity.FileEntity;
 import com.sintern.domain.entity.OpenInternPosition;
 import com.sintern.domain.entity.Student;
 import com.sintern.service.ApplicationService;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static com.sintern.api.response.transformer.GetApplicationTransformer.transform;
@@ -58,10 +56,8 @@ public class ApplicationController {
 
         for (Application application : applicationList) {
             Student student = application.getStudent();
-            Optional<FileEntity> fileEntityOptional = fileService.getByStudentId(student.getId());
-            GetApplicationByInternPositionResponse applicationRespone;
-            applicationRespone = fileEntityOptional.map(fileEntity -> transform(application, student, fileEntity.getData())).orElseGet(() -> transform(application, student, null));
-            applicationByInternPositionResponseList.add(applicationRespone);
+            GetApplicationByInternPositionResponse applicationResponse = transform(application, student);
+            applicationByInternPositionResponseList.add(applicationResponse);
         }
 
         return applicationByInternPositionResponseList;

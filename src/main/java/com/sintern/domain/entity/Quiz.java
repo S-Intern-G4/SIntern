@@ -3,6 +3,8 @@ package com.sintern.domain.entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,7 +28,8 @@ public class Quiz {
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     OpenInternPosition openInternPosition;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "quiz", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     List<QuizQuestion> quizQuestions;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quiz", cascade = CascadeType.ALL)
